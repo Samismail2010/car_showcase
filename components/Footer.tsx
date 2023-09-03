@@ -17,7 +17,7 @@ const Footer = () => {
                     height={18}
                     className='object-contain' />
                     <p className='text-base text-gray-700'>CarHub 2023 <br/>
-                    All rights reserved &copy <br/>
+                    All Rights Reserved & Copy <br/>
                     Creator: Sam Ismail</p>
                 </div>
 
