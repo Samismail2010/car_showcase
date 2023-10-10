@@ -6,8 +6,7 @@ import { SearchManufacturerProps } from '@/types'
 import { manufacturers } from '@/constants';
 import { Combobox, Transition } from '@headlessui/react'
 
-const SearchManufactuer = ({manufacturer,
-   setManufacturer}: SearchManufacturerProps ) => {
+const SearchManufacturer = ({selected, setSelected}: SearchManufacturerProps ) => {
     const [query, setQuery] = useState('');
 
     //if query is + empty sting = return all manufacturers
@@ -25,8 +24,8 @@ const SearchManufactuer = ({manufacturer,
       {/* pass data to pull searched cars below
       the state within the SearchBar is being updated */}
       <Combobox
-      value = { manufacturer}
-      onChange={setManufacturer}>
+      value = {selected}
+      onChange={setSelected}>
         <div className='relative w-full'>
           <Combobox.Button className='absolute top-[14px]'>
             <Image
@@ -53,7 +52,14 @@ const SearchManufactuer = ({manufacturer,
           afterLeave={() => setQuery('')}
           >
             <Combobox.Options>
-              {filteredManufacturers.map((item) =>(
+            {filteredManufacturers.length === 0 && query !== "" ? (
+                <Combobox.Option
+                  value={query}
+                  className='search-manufacturer__option'
+                >
+                  Create "{query}"
+                </Combobox.Option>
+              ) : (filteredManufacturers.map((item) =>(
                   <Combobox.Option
                   key={item}
                   className={({active}) => `
@@ -62,9 +68,21 @@ const SearchManufactuer = ({manufacturer,
                   `}
                   value={item}
                   >
-                    
+                    {({ selected, active }) => (
+                      <>
+                        <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                          {item}
+                        </span>
+
+                        {/* Show an active blue background color if the option is selected */}
+                        {selected ? (
+                          <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active? "text-white": "text-pribg-primary-purple"}`}
+                          ></span>
+                        ) : null}
+                      </>
+                    )}
                   </Combobox.Option>
-                )
+                ))
               )}
             </Combobox.Options>
           </Transition>
@@ -75,4 +93,4 @@ const SearchManufactuer = ({manufacturer,
   )
 }
 
-export default SearchManufactuer
+export default SearchManufacturer
