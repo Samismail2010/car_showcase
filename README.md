@@ -19,7 +19,7 @@ CarHub is a Next.js project where users can access various car-related content, 
 [Deployed Link](https://car-showcase-lybl.vercel.app/)
 
 ## Contributions
-none
+Sole Creator
 
 ## Questions
 * find me on Github: [samismail2010](https://github.com/samismail2010)
